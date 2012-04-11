@@ -10,7 +10,7 @@ use Test::More tests => 8;
 use_ok('Config::INI::Reader');
 
 # Try to read in a config
-my $hashref = Config::INI::Reader->read_file( 'examples/simple.ini' );
+my $hashref = Config::INI::Reader->read_file( 'corpus/simple.ini' );
 isa_ok($hashref, 'HASH', "return of Config::INI::Reader->read_file");
 
 # Check the structure of the config
@@ -65,7 +65,7 @@ END
 }
 
 { # Test read_handle
-  my $fh = IO::File->new('examples/simple.ini', 'r');
+  my $fh = IO::File->new('corpus/simple.ini', 'r');
   my $data = do { local $/ = undef; <$fh> };
 
   is_deeply(
