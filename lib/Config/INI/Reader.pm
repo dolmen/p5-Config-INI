@@ -90,9 +90,14 @@ handle.
 =cut
 
 sub read_handle {
-  my ($invocant, $handle) = @_;
+  my ($invocant, $handle, $encoding) = @_;
 
   my $self = ref $invocant ? $invocant : $invocant->new;
+
+  if ($encoding) {
+    $encoding = $encoding->name if ref $encoding;
+    $handle->binmode(':encoding('.$encoding.')');
+  }
 
   # parse the file
   LINE: while (my $line = $handle->getline) {

@@ -85,7 +85,7 @@ All the reader methods throw an exception when they encounter an error.
 
 =head2 write_file
 
-  Config::INI::Writer->write_file($input, $filename);
+  Config::INI::Writer->write_file($input, $filename, $encoding);
 
 This method writes out the configuration represented by C<$data> to the file
 named by C<$filename>.  If a file by that name exists, it is overwritten.
@@ -102,7 +102,7 @@ data.
 
 =head2 write_handle
 
-  Config::INI::Writer->write_handle($input, $handle);
+  Config::INI::Writer->write_handle($input, $handle, $encoding);
 
 This method writes the data in C<$data> to the IO::Handle-like object in
 C<$handle>.  This method should either succeed or throw an exception.
@@ -110,9 +110,14 @@ C<$handle>.  This method should either succeed or throw an exception.
 =cut
 
 sub write_handle {
-  my ($invocant, $input, $handle) = @_;
+  my ($invocant, $input, $handle, $encoding) = @_;
 
   my $self = ref $invocant ? $invocant : $invocant->new;
+
+  if ($encoding) {
+    $encoding = $encoding->name if ref $encoding;
+    $handle->binmode(':encoding('.$encoding.')');
+  }
 
   $input = $self->preprocess_input($input);
 
