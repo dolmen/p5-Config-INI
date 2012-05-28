@@ -14,7 +14,7 @@ use Config::INI::Reader;
 # Check the structure of the config
 my $expected = {
   '_' => {
-    écrivain => 'Olivier Mengué',
+    'écrivain' => 'Olivier Mengué',
   },
   'Section n°1' => {
     1 => 'déchaînées',
@@ -40,10 +40,10 @@ my $expected = {
 # Add some stuff to the trivial config and check write_string() for it
 my $expected2 = {
     _ => {
-	écrivain => 'Olivier Mengué',
+	'écrivain' => 'Olivier Mengué',
     },
-    Cœur => {
-	Clé => 'κλειδί',
+    'Cœur' => {
+	'Clé' => 'κλειδί',
     },
 };
 
